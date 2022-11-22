@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminMainPage.AdminMainController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TabPane layoutX="2.0" prefHeight="373.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Admin Interface">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: D6E4E5;">
+                           <children>
+                              <Button fx:id="LogOut" layoutX="14.0" layoutY="298.0" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="100.0" text="LogOut">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="LoadEmployeeList" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadEmployeeData" prefHeight="30.0" prefWidth="100.0" text="View/Update List">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="10.0" />
+                                 </font>
+                              </Button>
+                              <TableView fx:id="employeeTableView3" layoutX="139.0" layoutY="-1.0" prefHeight="220.0" prefWidth="501.0">
+                                <columns>
+                                  <TableColumn fx:id="ID_column3" prefWidth="62.0" text="User ID" />
+                                  <TableColumn fx:id="Username_column3" prefWidth="103.0" text="User Name" />
+                                    <TableColumn fx:id="Fullname_column3" prefWidth="102.0" text="Full name" />
+                                    <TableColumn fx:id="Phone_number_column3" prefWidth="114.0" text="Phone number" />
+                                    <TableColumn fx:id="Email_column3" prefWidth="119.0" text="Email" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="Remove_user" layoutX="14.0" layoutY="189.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="30.0" prefWidth="100.0" text="Remove User">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="Modify_user" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="30.0" prefWidth="100.0" text="Modify ">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="10.0" />
+                                 </font>
+                              </Button>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Add Employee">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox accessibleRole="CHECK_MENU_ITEM" prefHeight="344.0" prefWidth="640.0" style="-fx-background-color: D6E4E5;" />
+                              <Button fx:id="Submit_Button" layoutX="380.0" layoutY="300.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="30.0" prefWidth="100.0" text="Submit">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="10.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="280.0" layoutY="20.0" text="Registration">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Text layoutX="70.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="Username_Field" layoutX="140.0" layoutY="70.0" promptText="Enter username">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <Text layoutX="310.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="Password_Field" accessibleRole="PASSWORD_FIELD" layoutX="380.0" layoutY="70.0" promptText="Enter password">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="Fullname_Field" layoutX="140.0" layoutY="108.0" promptText="Enter fullname">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <Text layoutX="75.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fullname:">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="Address_Field" layoutX="380.0" layoutY="108.0" promptText="Enter address">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <Text layoutX="320.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="42.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="Phone_Number_Field" layoutX="140.0" layoutY="147.0" promptText="Enter phone number">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <Text layoutX="335.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" wrappingWidth="40.21044921875">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="Email_Field" layoutX="380.0" layoutY="147.0" promptText="Enter email">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="Class_Number_Field" layoutX="140.0" layoutY="188.0" promptText="Enter class number">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <Text layoutX="46.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class number:">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <Button fx:id="Clear_Form" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="30.0" prefWidth="100.0" text="Clear Form">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="10.0" />
+                                 </font>
+                              </Button>
+                              <ComboBox fx:id="Subjects_ComboBox" layoutX="380.0" layoutY="180.0" maxWidth="700.0" minWidth="160.0" prefHeight="25.0" prefWidth="150.0" />
+                              <ComboBox fx:id="Job_Type" layoutX="380.0" layoutY="215.0" maxWidth="700.0" minWidth="160.0" prefHeight="25.0" prefWidth="150.0" />
+                              <Text layoutX="314.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Job Type:" wrappingWidth="64.21044921875">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="330.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study:" wrappingWidth="45.21044921875">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="Alert" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="200.0" layoutY="270.0" prefHeight="17.0" prefWidth="275.0" textAlignment="CENTER" textFill="#e83939">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="View Employee List">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TabPane fx:id="employeeTable" layoutX="-1.0" prefHeight="341.0" prefWidth="642.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Employee User">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TableView fx:id="employeeTableView" prefHeight="311.0" prefWidth="642.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="ID_column" prefWidth="66.0" text="User ID" />
+                                                    <TableColumn fx:id="Username_column" prefWidth="194.0" text="User Name" />
+                                                      <TableColumn fx:id="Password_column" prefWidth="190.0" text="User Password" />
+                                                      <TableColumn fx:id="Register_column" prefWidth="191.0" text="Date register" />
+                                                  </columns>
+                                                </TableView>
+                                             </children></AnchorPane>
+                                    </content>
+                                  </Tab>
+                                  <Tab text="Employee Personal Details">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TableView fx:id="employeeTableView1" prefHeight="310.0" prefWidth="642.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="ID_column1" prefWidth="32.0" text="ID" />
+                                                    <TableColumn fx:id="Fullname_column" prefWidth="107.0" text="Full name" />
+                                                      <TableColumn fx:id="Address_column" prefWidth="101.0" text="Address" />
+                                                      <TableColumn fx:id="Phone_number_column" prefWidth="105.0" text="Phone number" />
+                                                      <TableColumn fx:id="Email_column" prefWidth="92.0" text="Email" />
+                                                      <TableColumn fx:id="Job_type_column" prefWidth="67.0" text="Job type" />
+                                                      <TableColumn fx:id="Subjects_column" prefWidth="110.0" text="Subjects of study" />
+                                                      <TableColumn fx:id="Class_column" prefWidth="110.0" text="Class" />
+                                                  </columns>
+                                                </TableView>
+                                             </children></AnchorPane>
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
