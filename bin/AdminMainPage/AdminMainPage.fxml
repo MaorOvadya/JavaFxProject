@@ -97,33 +97,33 @@
               <tabs>
                 <Tab text="Admin Interface">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: D6E4E5;">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: FFF5E4;">
                            <children>
-                              <Button fx:id="LogOut" layoutX="14.0" layoutY="298.0" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="100.0" text="LogOut">
+                              <Button fx:id="LogOut_Button" layoutX="133.0" layoutY="283.0" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="LogOut">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="LoadEmployeeList" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadEmployeeData" prefHeight="30.0" prefWidth="100.0" text="View/Update List">
+                              <Button fx:id="LoadEmployeeList" layoutX="14.0" layoutY="238.0" mnemonicParsing="false" onAction="#loadEmployeeData" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="View/Update List">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
                               </Button>
-                              <TableView fx:id="employeeTableView3" layoutX="139.0" layoutY="-1.0" prefHeight="220.0" prefWidth="501.0">
+                              <TableView fx:id="employeeTableView2" layoutY="-1.0" prefHeight="220.0" prefWidth="640.0">
                                 <columns>
-                                  <TableColumn fx:id="ID_column3" prefWidth="62.0" text="User ID" />
-                                  <TableColumn fx:id="Username_column3" prefWidth="103.0" text="User Name" />
-                                    <TableColumn fx:id="Fullname_column3" prefWidth="102.0" text="Full name" />
-                                    <TableColumn fx:id="Phone_number_column3" prefWidth="114.0" text="Phone number" />
-                                    <TableColumn fx:id="Email_column3" prefWidth="119.0" text="Email" />
+                                  <TableColumn fx:id="ID_column2" prefWidth="64.0" text="User ID" />
+                                  <TableColumn fx:id="Username_column1" prefWidth="167.0" text="User Name" />
+                                    <TableColumn fx:id="Fullname_column1" prefWidth="154.0" text="Full name" />
+                                    <TableColumn fx:id="Phone_column1" prefWidth="111.0" text="Phone " />
+                                    <TableColumn fx:id="Email_column1" prefWidth="141.0" text="Email" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="Remove_user" layoutX="14.0" layoutY="189.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="30.0" prefWidth="100.0" text="Remove User">
+                              <Button fx:id="Remove_Button" layoutX="133.0" layoutY="238.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Remove User">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="Modify_user" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="30.0" prefWidth="100.0" text="Modify ">
+                              <Button fx:id="Modify_Button" layoutX="14.0" layoutY="283.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Modify ">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
@@ -135,7 +135,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <HBox accessibleRole="CHECK_MENU_ITEM" prefHeight="344.0" prefWidth="640.0" style="-fx-background-color: D6E4E5;" />
+                              <HBox accessibleRole="CHECK_MENU_ITEM" prefHeight="344.0" prefWidth="640.0" style="-fx-background-color: FFF5E4;" />
                               <Button fx:id="Submit_Button" layoutX="380.0" layoutY="300.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="30.0" prefWidth="100.0" text="Submit">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
@@ -186,7 +186,7 @@
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="42.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:">
+                              <Text layoutX="95.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:">
                                  <font>
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
@@ -216,7 +216,7 @@
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
                               </Text>
-                              <Button fx:id="Clear_Form" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="30.0" prefWidth="100.0" text="Clear Form">
+                              <Button fx:id="Clear_Button" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="30.0" prefWidth="100.0" text="Clear Form">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
@@ -271,7 +271,7 @@
                                                     <TableColumn fx:id="ID_column1" prefWidth="32.0" text="ID" />
                                                     <TableColumn fx:id="Fullname_column" prefWidth="107.0" text="Full name" />
                                                       <TableColumn fx:id="Address_column" prefWidth="101.0" text="Address" />
-                                                      <TableColumn fx:id="Phone_number_column" prefWidth="105.0" text="Phone number" />
+                                                      <TableColumn fx:id="Phone_number_column" prefWidth="105.0" text="Phone " />
                                                       <TableColumn fx:id="Email_column" prefWidth="92.0" text="Email" />
                                                       <TableColumn fx:id="Job_type_column" prefWidth="67.0" text="Job type" />
                                                       <TableColumn fx:id="Subjects_column" prefWidth="110.0" text="Subjects of study" />

@@ -53,7 +53,7 @@ public class AdminLoginController implements Initializable {
         }
     }
 
-    public void admin_Main_Page() { // Moving to admin main page
+    public void admin_Main_Page() { // Moving to Admin main page
 
         Stage mainAdminPage = new Stage();
         try {

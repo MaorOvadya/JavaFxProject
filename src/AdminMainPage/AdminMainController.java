@@ -3,17 +3,13 @@ package AdminMainPage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -21,7 +17,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,25 +24,32 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class AdminMainController implements Initializable {
     
     AdminMainModel adminMainModel = null;
 
-
+    // Admin Interface Buttons  
     @FXML
-    private Button LogOut;
+    private Button Search_Button;
+    @FXML
+    private Button LogOut_Button;
+    @FXML
+    private Button Modify_Button;
+    @FXML
+    private Button Remove_Button;
     @FXML
     private Label Alert;
-
-    // Form Add employee buttons
     @FXML
-    private Button Modify_user;
+    private TextField Search_textField;
+
+    // Add Employee buttons
     @FXML
     private Button Submit_Button;
     @FXML
-    private Button Remove_user;
+    private Button Clear_Button;
+
+    //  Add Employee Fields
     @FXML
     private TextField Username_Field;
     @FXML
@@ -68,13 +70,14 @@ public class AdminMainController implements Initializable {
     private ComboBox<String> Job_Type;
 
     // Table List View
-
     @FXML
     private TableView<EmployeeData> employeeTableView;
     @FXML
     private TableView<EmployeeData> employeeTableView1;
     @FXML
-    private TableView<EmployeeData> employeeTableView3;
+    private TableView<EmployeeData> employeeTableView2;
+
+    // EmployeeTableView
     @FXML
     private TableColumn<EmployeeData, String> ID_column; // employeeTableView
     @FXML
@@ -83,6 +86,8 @@ public class AdminMainController implements Initializable {
     private TableColumn<EmployeeData, String> Password_column; // employeeTableView
     @FXML
     private TableColumn<EmployeeData, String> Register_column; // employeeTableView
+
+    // EmployeeTableView1
     @FXML
     private TableColumn<EmployeeData, String> ID_column1; // employeeTableView1
     @FXML
@@ -98,25 +103,29 @@ public class AdminMainController implements Initializable {
     @FXML
     private TableColumn<EmployeeData, String> Subjects_column;  // employeeTableView1
     @FXML
-    private TableColumn<EmployeeData, String> ID_column2;
+    private TableColumn<EmployeeData,String> job_type; // employeeTableView1
     @FXML
-    private TableColumn<EmployeeData, String> Fullname_column1;
-    @FXML
-    private TableColumn<EmployeeData, String> ID_column3;
-    @FXML
-    private TableColumn<EmployeeData, String> Fullname_column3;
-    @FXML
-    private TableColumn<EmployeeData, String> Username_column3;
-    @FXML
-    private TableColumn<EmployeeData, String> Phone_number_column3;
-    @FXML
-    private TableColumn<EmployeeData, String> Email_column3;
-    @FXML
-    private TableColumn<EmployeeData,String> job_type;
-    
+    private TableColumn<EmployeeData,String> Class_column; // employeeTableView1
 
+
+    // EmployeeTableView2
+    @FXML
+    private TableColumn<EmployeeData, String> ID_column2; // employeeTableView2
+    @FXML
+    private TableColumn<EmployeeData, String> Username_column1; // employeeTableView2
+    @FXML
+    private TableColumn<EmployeeData, String> Fullname_column1; // employeeTableView2
+    @FXML
+    private TableColumn<EmployeeData, String> Phone_column1; // employeeTableView2
+    @FXML
+    private TableColumn<EmployeeData, String> Email_column1; // employeeTableView2
+
+    // ComboBox With options to choose:
     ObservableList<String> settingSub;
     ObservableList<String> settingJob;
+
+    // Dialog Pane:
+    Dialog<ButtonType> dialog = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -127,24 +136,37 @@ public class AdminMainController implements Initializable {
         Job_Type.setItems(settingJob);
 
                //disable delete and edit buttons
-               Remove_user.setDisable(true);
-               Modify_user.setDisable(true);
+               Remove_Button.setDisable(true);
+               Modify_Button.setDisable(true);
 
-               employeeTableView3.setOnMouseClicked(e -> {
-                   EmployeeData selected = employeeTableView3.getSelectionModel().getSelectedItem();
+               // When select Table Button valid 
+               employeeTableView2.setOnMouseClicked(e -> {
+                   EmployeeData selected = employeeTableView2.getSelectionModel().getSelectedItem();
 
                    if(selected != null){
-                    Remove_user.setDisable(false);
-                    Modify_user.setDisable(false);
-
-                    
+                    Remove_Button.setDisable(false);
+                    Modify_Button.setDisable(false);  
                 }
             });
-       
     }
 
-    public void loadEmployeeData(ActionEvent event) {
-    // load employee data
+    public void logOut() { // Moving to Logout to admin login page
+
+        Stage mainLoginAdminPage = new Stage();
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminLoginPage/AdminLoginPage.fxml")));
+
+            mainLoginAdminPage.setScene(scene);
+            mainLoginAdminPage.setTitle("Admin Management System");
+            mainLoginAdminPage.setResizable(false);
+            mainLoginAdminPage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadEmployeeData(ActionEvent event) { // load employee data
 
         //table 1: employeeTableView
 
@@ -166,25 +188,27 @@ public class AdminMainController implements Initializable {
         this.Email_column.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         this.Job_type_column.setCellValueFactory(cellData -> cellData.getValue().jobtypeProperty());
         this.Subjects_column.setCellValueFactory(cellData -> cellData.getValue().subjectsofstudyingProperty());
-
+        this.Class_column.setCellValueFactory(cellData -> cellData.getValue().classnumberProperty());
 
         this.employeeTableView1.setItems(null);
         this.employeeTableView1.setItems(adminMainModel.getEmployees());
 
-        this.ID_column3.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-        this.Fullname_column3.setCellValueFactory(cellData -> cellData.getValue().fullnameProperty());
-        this.Username_column3.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
-        this.Phone_number_column3.setCellValueFactory(cellData -> cellData.getValue().phonenumberProperty());
-        this.Email_column3.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+        //table 2: employeeTableView2
 
-        this.employeeTableView3.setItems(null);
-        this.employeeTableView3.setItems(adminMainModel.getEmployees());
+        this.ID_column2.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+        this.Username_column1.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
+        this.Fullname_column1.setCellValueFactory(cellData -> cellData.getValue().fullnameProperty());
+        this.Phone_column1.setCellValueFactory(cellData -> cellData.getValue().phonenumberProperty());
+        this.Email_column1.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+
+        this.employeeTableView2.setItems(null);
+        this.employeeTableView2.setItems(adminMainModel.getEmployees());
 
     }
 
-
     @FXML
-    private void addEmployee(ActionEvent event) {
+    private void addEmployee(ActionEvent event) { // Add employee Method
+
         if(this.Username_Field.getText() != null &&  this.Password_Field.getText() != null && this.Fullname_Field.getText() != null
         && this.Address_Field.getText() != null && this.Phone_Number_Field.getText() !=null && this.Email_Field.getText() != null
         && this.Class_Number_Field.getText() !=null && this.Subjects_ComboBox.getValue() != null && this.Job_Type.getValue() != null) {
@@ -193,29 +217,16 @@ public class AdminMainController implements Initializable {
             this.Fullname_Field.getText(),this.Address_Field.getText(),this.Phone_Number_Field.getText(),
             this.Email_Field.getText(),this.Class_Number_Field.getText(),
             this.Subjects_ComboBox.getValue(),this.Job_Type.getValue());
-            
+
+            Alert alert1 = new Alert(AlertType.INFORMATION);
+            alert1.setTitle("Information Message");
+            alert1.setHeaderText("User added successfully to the list");
+            alert1.setContentText("To view, update the list");
+            alert1.showAndWait();
             this.loadEmployeeData(event);
             this.clearFields(event);
         }  else {
             this.Alert.setText("Please fill all form");
-            
-        }
-
-    }
-
-    public void logOut() { // Moving to Logout to admin login page
-
-        Stage mainLoginAdminPage = new Stage();
-        try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminLoginPage/AdminLoginPage.fxml")));
-
-            mainLoginAdminPage.setScene(scene);
-            mainLoginAdminPage.setTitle("Admin Management System");
-            mainLoginAdminPage.setResizable(false);
-            mainLoginAdminPage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -230,40 +241,59 @@ public class AdminMainController implements Initializable {
         this.Subjects_ComboBox.setValue(null);;
         this.Job_Type.setValue(null);
         this.Alert.setText(null);
-     
-
     }
+
     @FXML
     private void deleteEmployee(ActionEvent event){
-        EmployeeData selectedItem = employeeTableView3.getSelectionModel().getSelectedItem();
+        EmployeeData selectedItem = employeeTableView2.getSelectionModel().getSelectedItem();
 
-        employeeTableView3.getItems().remove(selectedItem); // delete from Local 
+        employeeTableView2.getItems().remove(selectedItem); // delete from Local 
      
         adminMainModel.deleteEmployee(selectedItem.idProperty().getValue());  //delete from Database
     }
 
-
-    Dialog<ButtonType> dialog = null;
+    
 
     @FXML
-    private void editEmployee(ActionEvent event){
+    private void editEmployee(ActionEvent event){ // Method to Edit employee
 
-        EmployeeData teacherEdit = employeeTableView3.getSelectionModel().getSelectedItem();
+        EmployeeData teacherEdit = employeeTableView2.getSelectionModel().getSelectedItem();
         String editId = teacherEdit.idProperty().getValue();
 
-        //create modal
-        createModal();
+        createModal(); //create modal
 
-        //call the modal
-        dialog.showAndWait().ifPresent(response -> {
-            if(response.getButtonData().equals(ButtonData.OK_DONE)){
-                System.out.println("name:" +Username_Field.getText());
-                adminMainModel.editEmployee(editId , editUserNameString.getText(), editPasswordtString.getText()
-                ,editFullNameString.getText(), editAddressString.getText(), editPhoneNumberString.getText(), editEmailString.getText()
-                , editClassNumberString.getText(), Job.getValue(),Study.getValue());
-                this.loadEmployeeData(event);
-            }
-        });
+
+        dialog.showAndWait().ifPresent(response -> { //call the modal
+
+
+                if(response.getButtonData().equals(ButtonData.OK_DONE))
+                {    
+
+                    if (editUserNameString.getText() != null && editPasswordtString.getText() != null && editFullNameString.getText() != null 
+                        && editAddressString.getText() != null && editPhoneNumberString.getText() != null && editEmailString.getText() != null
+                        && editClassNumberString.getText() != null && Job.getValue() != null && Study.getValue() != null)
+                         {
+                            adminMainModel.editEmployee(editId , editUserNameString.getText(), editPasswordtString.getText()
+                            ,editFullNameString.getText(), editAddressString.getText(), editPhoneNumberString.getText(), editEmailString.getText()
+                            ,editClassNumberString.getText(), Job.getValue(),Study.getValue());
+                            Alert alert1 = new Alert(AlertType.INFORMATION);
+                            alert1.setTitle("Information Message");
+                            alert1.setHeaderText("User edited successfully");
+                            alert1.setContentText("To view, update the list");
+                            alert1.showAndWait();
+                            this.loadEmployeeData(event);
+                        }
+                        else 
+                        {
+                            System.out.println("Fill all the fields");
+                            Alert alert = new Alert(AlertType.WARNING);
+                            alert.setTitle("Warning Message");
+                            alert.setHeaderText("User cannot be modify");
+                            alert.setContentText("Please fill all empty fields");
+                            alert.showAndWait();
+                        }
+                    }              
+        }   );
     }
 
     private String editUserName;
@@ -314,21 +344,20 @@ public class AdminMainController implements Initializable {
         gridPane.add(editFullNameString, 1, 2);
         gridPane.add(new Label("Address"), 0, 3);
         gridPane.add(editAddressString, 1, 3);
-        gridPane.add(new Label("Phone number"), 0, 4);
+        gridPane.add(new Label("Phone"), 0, 4);
         gridPane.add(editPhoneNumberString, 1, 4);
         gridPane.add(new Label("Email"), 0, 5);
         gridPane.add(editEmailString, 1, 5);
-        gridPane.add(new Label("Subject of study"), 0, 6);
-        gridPane.add(Study = new ComboBox<String>(settingSub), 1, 6);
-        gridPane.add(new Label("Job type"), 0, 7);
-        gridPane.add(Job = new ComboBox<String>(settingJob), 1, 7);
-        gridPane.add(new Label("Class number"), 0, 8);
-        gridPane.add(editClassNumberString, 1, 8);
+        gridPane.add(new Label("Class number"), 0, 6);
+        gridPane.add(editClassNumberString, 1, 6);
+        gridPane.add(new Label("Subject of study"), 0, 7);
+        gridPane.add(Job = new ComboBox<String>(settingSub), 1, 7);
+        gridPane.add(new Label("Job type"), 0, 8);
+        gridPane.add(Study = new ComboBox<String>(settingJob), 1, 8);
 
         dialog.getDialogPane().setContent(gridPane);
 
         dialog.getDialogPane().getButtonTypes().add(editModalBtn);
         dialog.getDialogPane().getButtonTypes().add(cancelModalBtn);
     }
-
 }

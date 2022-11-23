@@ -22,7 +22,7 @@ public class AdminLoginModel {
     }
 
 
-    public boolean admin_login(String string, String password){
+    public boolean admin_login(String string, String password){ // Method login as admin 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
@@ -50,7 +50,4 @@ public class AdminLoginModel {
         }
     }
 
-    public boolean admin_login(boolean b) {
-        return false;
-    }
 }

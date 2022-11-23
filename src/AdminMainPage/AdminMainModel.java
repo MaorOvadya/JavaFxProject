@@ -61,7 +61,6 @@ public class AdminMainModel {
                         return employeeData;
 
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println(e);
         }
         return null;
@@ -72,7 +71,6 @@ public class AdminMainModel {
 
         String query = "INSERT INTO teachers_tbl (username,password,fullname,phone_number,address,email,class_number,subject_of_studying,job_type) VALUES (?,?,?,?,?,?,?,?,?)";
         PreparedStatement statement = null;
-
 
         try {
             statement = connection.prepareStatement(query);
@@ -157,6 +155,4 @@ public class AdminMainModel {
             }
         }
     }
-
-
 }
