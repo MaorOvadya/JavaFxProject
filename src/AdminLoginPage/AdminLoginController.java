@@ -60,7 +60,7 @@ public class AdminLoginController implements Initializable {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/AdminMainPage/AdminMainPage.fxml")));
 
             mainAdminPage.setScene(scene);
-            mainAdminPage.setTitle("Admin Login Page");
+            mainAdminPage.setTitle("TMS");
             mainAdminPage.setResizable(false);
             mainAdminPage.close();
             mainAdminPage.show();

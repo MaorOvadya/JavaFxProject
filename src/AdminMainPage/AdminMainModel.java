@@ -123,25 +123,23 @@ public class AdminMainModel {
         }
     }
 
-    public void editEmployee(String id, String username,String password, String fullname,String address
-    ,String phonenumber,String email, String subjectsofstudying,String classnumber,String jobtype) {
-        String sql = "UPDATE teachers_tbl SET username = ?, password = ?,fullname = ?, phone_number = ?,address = ?, email = ?,class_number = ?, subject_of_studying = ?,job_type = ? WHERE id = ?";
+    public void editEmployee(String id,String fullname,String address
+    ,String phonenumber,String email, String subjectsofstudying,String classnumber,String jobtype) { // Method to edit emplyee details
+        String sql = "UPDATE teachers_tbl SET fullname = ?, phone_number = ?,address = ?, email = ?,class_number = ?, subject_of_studying = ?,job_type = ? WHERE id = ?";
         PreparedStatement statement = null;
 
         try {
             Connection conn = DataBaseConnection.getConnection();
             statement = conn.prepareStatement(sql);
 
-            statement.setString(1, username);
-            statement.setString(2, password);
-            statement.setString(3, fullname);
-            statement.setString(4, phonenumber);
-            statement.setString(5, address);
-            statement.setString(6, email);
-            statement.setString(7, classnumber);
-            statement.setString(8, subjectsofstudying);
-            statement.setString(9, jobtype);
-            statement.setInt(10, Integer.parseInt(id));
+            statement.setString(1, fullname);
+            statement.setString(2, phonenumber);
+            statement.setString(3, address);
+            statement.setString(4, email);
+            statement.setString(5, classnumber);
+            statement.setString(6, subjectsofstudying);
+            statement.setString(7, jobtype);
+            statement.setInt(8, Integer.parseInt(id));
 
             statement.execute();
 
@@ -155,4 +153,31 @@ public class AdminMainModel {
             }
         }
     }
+
+    public void editEmployee1(String id, String username,String password) { // Method to edit emplyee login user
+        String sql = "UPDATE teachers_tbl SET username = ?, password = ? WHERE id = ?";
+        PreparedStatement statement = null;
+
+        try {
+            Connection conn = DataBaseConnection.getConnection();
+            statement = conn.prepareStatement(sql);
+
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setInt(3, Integer.parseInt(id));
+
+            statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally{
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }
