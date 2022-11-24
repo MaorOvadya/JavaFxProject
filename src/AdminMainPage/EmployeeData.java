@@ -8,7 +8,8 @@ public class EmployeeData {
 private StringProperty id;
 private StringProperty Username;
 private StringProperty Password;
-private StringProperty Fullname;
+private StringProperty Firstname;
+private StringProperty Lastname;
 private StringProperty Phonenumber;
 private StringProperty Address;
 private StringProperty Email;
@@ -19,21 +20,42 @@ private StringProperty Date;
 
 
 
-public EmployeeData(String id,String date,String username,String password, String fullname,String address
+public EmployeeData(String id,String date,String username,String password, String firstname,String lastname,String address
 ,String phonenumber,String email, String subjectsofstudying,String classnumber,String jobtype) {
 
     this.id = new SimpleStringProperty(id); //1
     this.Date = new SimpleStringProperty(date); //2
     this.Username = new SimpleStringProperty(username); //3
     this.Password = new SimpleStringProperty(password); //4
-    this.Fullname = new SimpleStringProperty(fullname); //5
-    this.Address = new SimpleStringProperty(address); //6
-    this.Phonenumber = new SimpleStringProperty(phonenumber); //7
-    this.Email = new SimpleStringProperty(email); //8
-    this.SubjectsOfStudying = new SimpleStringProperty(subjectsofstudying); //9
-    this.Classnumber = new SimpleStringProperty(classnumber); //10
-    this.JobType = new SimpleStringProperty(jobtype); //11
+    this.Firstname = new SimpleStringProperty(firstname); //5
+    this.Lastname = new SimpleStringProperty(lastname); //6
+    this.Address = new SimpleStringProperty(address); //7
+    this.Phonenumber = new SimpleStringProperty(phonenumber); //8
+    this.Email = new SimpleStringProperty(email); //9
+    this.SubjectsOfStudying = new SimpleStringProperty(subjectsofstudying); //10
+    this.Classnumber = new SimpleStringProperty(classnumber); //11
+    this.JobType = new SimpleStringProperty(jobtype); //12
 
+}
+
+
+public StringProperty firstnamePropery() {
+    return Firstname;
+}
+
+
+public void setFirstname(StringProperty firstname) {
+    this.Firstname = firstname;
+}
+
+
+public StringProperty lastnameProperty() {
+    return Lastname;
+}
+
+
+public void setLastname(StringProperty lastname) {
+    this.Lastname = lastname;
 }
 
 
@@ -84,16 +106,6 @@ public StringProperty idProperty() {
 
 public void setId(StringProperty id) {
     this.id = id;
-}
-
-
-public StringProperty fullnameProperty() {
-    return Fullname;
-}
-
-
-public void setFullname(StringProperty fullname) {
-    this.Fullname = fullname;
 }
 
 

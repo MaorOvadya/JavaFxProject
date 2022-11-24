@@ -91,44 +91,45 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="500.0" prefWidth="700.0" VBox.vgrow="ALWAYS">
          <children>
-            <TabPane layoutX="2.0" prefHeight="373.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="2.0" prefHeight="373.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Admin Interface">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: FFF5E4;">
                            <children>
-                              <Button fx:id="LogOut_Button" layoutX="14.0" layoutY="298.0" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="LogOut">
+                              <Button fx:id="LogOut_Button" layoutX="15.0" layoutY="298.0" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="LogOut">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="LoadEmployeeList" layoutX="15.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadEmployeeData" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="View/Update List">
+                              <Button fx:id="LoadEmployeeList" layoutX="15.0" layoutY="49.0" mnemonicParsing="false" onAction="#loadEmployeeData" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="View/Update List">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
                               </Button>
-                              <TableView fx:id="employeeTableView2" layoutX="128.0" layoutY="47.0" prefHeight="249.0" prefWidth="512.0">
+                              <TableView fx:id="employeeTableView2" layoutX="128.0" layoutY="50.0" prefHeight="293.0" prefWidth="957.0">
                                 <columns>
                                   <TableColumn fx:id="ID_column2" prefWidth="64.0" text="User ID" />
-                                  <TableColumn fx:id="Username_column1" prefWidth="167.0" text="User Name" />
-                                    <TableColumn fx:id="Fullname_column1" prefWidth="154.0" text="Full name" />
-                                    <TableColumn fx:id="Phone_column1" prefWidth="111.0" text="Phone " />
-                                    <TableColumn fx:id="Email_column1" prefWidth="141.0" text="Email" />
+                                  <TableColumn fx:id="Username_column1" minWidth="4.0" prefWidth="90.0" text="User Name" />
+                                    <TableColumn fx:id="Firstname_column1" prefWidth="73.0" text="First name" />
+                                    <TableColumn fx:id="Lastname_column1" prefWidth="89.0" text="Last name" />
+                                    <TableColumn fx:id="Phone_column1" minWidth="0.0" prefWidth="103.0" text="Phone " />
+                                    <TableColumn fx:id="Email_column1" prefWidth="152.0" text="Email" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="Remove_Button" layoutX="14.0" layoutY="219.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Remove User">
+                              <Button fx:id="Remove_Button" layoutX="15.0" layoutY="196.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Remove User">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="Modify_Employee_Button" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Modify Employee">
+                              <Button fx:id="Modify_Employee_Button" layoutX="15.0" layoutY="116.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Modify Employee">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="Modify_User_Button" layoutX="14.0" layoutY="173.0" mnemonicParsing="false" onAction="#editEmployee1" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Modify User">
+                              <Button fx:id="Modify_User_Button" layoutX="15.0" layoutY="156.0" mnemonicParsing="false" onAction="#editEmployee1" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20;" text="Modify User">
                                  <font>
                                     <Font name="SansSerif Bold" size="10.0" />
                                  </font>
@@ -138,26 +139,26 @@
                                     <Font name="SansSerif Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="SearchField" layoutX="197.0" layoutY="17.0" prefHeight="26.0" prefWidth="429.0" promptText="Input Keywords" />
+                              <TextField fx:id="SearchField" layoutX="198.0" layoutY="18.0" prefHeight="26.0" prefWidth="429.0" promptText="Input Keywords" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
                   <Tab text="View Employee List">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="779.0">
                            <children>
-                              <TabPane fx:id="employeeTable" layoutX="-1.0" prefHeight="341.0" prefWidth="642.0" tabClosingPolicy="UNAVAILABLE">
+                              <TabPane fx:id="employeeTable" layoutX="-1.0" prefHeight="341.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
                                   <Tab text="Employee User">
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="employeeTableView" prefHeight="311.0" prefWidth="642.0">
+                                                <TableView fx:id="employeeTableView" prefHeight="311.0" prefWidth="702.0">
                                                   <columns>
-                                                    <TableColumn fx:id="ID_column" prefWidth="66.0" text="User ID" />
-                                                    <TableColumn fx:id="Username_column" prefWidth="194.0" text="User Name" />
-                                                      <TableColumn fx:id="Password_column" prefWidth="190.0" text="User Password" />
-                                                      <TableColumn fx:id="Register_column" prefWidth="191.0" text="Date register" />
+                                                    <TableColumn fx:id="ID_column" prefWidth="162.0" text="User ID" />
+                                                    <TableColumn fx:id="Username_column" prefWidth="138.0" text="User Name" />
+                                                      <TableColumn fx:id="Password_column" prefWidth="140.0" text="User Password" />
+                                                      <TableColumn fx:id="Register_column" prefWidth="261.0" text="Date register" />
                                                   </columns>
                                                 </TableView>
                                              </children></AnchorPane>
@@ -167,16 +168,17 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="employeeTableView1" prefHeight="310.0" prefWidth="642.0">
+                                                <TableView fx:id="employeeTableView1" prefHeight="310.0" prefWidth="831.0">
                                                   <columns>
                                                     <TableColumn fx:id="ID_column1" prefWidth="32.0" text="ID" />
-                                                    <TableColumn fx:id="Fullname_column" prefWidth="107.0" text="Full name" />
-                                                      <TableColumn fx:id="Address_column" prefWidth="101.0" text="Address" />
-                                                      <TableColumn fx:id="Phone_number_column" prefWidth="105.0" text="Phone " />
-                                                      <TableColumn fx:id="Email_column" prefWidth="92.0" text="Email" />
-                                                      <TableColumn fx:id="Subjects_column" prefWidth="130.0" text="Subjects of study" />
-                                                      <TableColumn fx:id="Class_column" prefWidth="117.0" text="Class" />
-                                                      <TableColumn fx:id="Job_type_column" prefWidth="74.0" text="Job type" />
+                                                    <TableColumn fx:id="Firstname_column" prefWidth="91.0" text="First name" />
+                                                      <TableColumn fx:id="Lastname_column" prefWidth="86.0" text="Last name" />
+                                                      <TableColumn fx:id="Address_column" prefWidth="110.0" text="Address" />
+                                                      <TableColumn fx:id="Phone_number_column" prefWidth="76.0" text="Phone " />
+                                                      <TableColumn fx:id="Email_column" prefWidth="104.0" text="Email" />
+                                                      <TableColumn fx:id="Class_column" prefWidth="69.0" text="Class" />
+                                                      <TableColumn fx:id="Subjects_column" prefWidth="131.0" text="Subjects of study" />
+                                                      <TableColumn fx:id="Job_type_column" prefWidth="92.0" text="Job type" />
                                                   </columns>
                                                 </TableView>
                                              </children></AnchorPane>
@@ -223,12 +225,12 @@
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="Fullname_Field" layoutX="140.0" layoutY="108.0" promptText="Enter fullname">
+                              <TextField fx:id="Firstname_Field" layoutX="140.0" layoutY="108.0" promptText="Enter Firstname">
                                  <font>
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
                               </TextField>
-                              <Text layoutX="75.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fullname:">
+                              <Text layoutX="75.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname:">
                                  <font>
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
@@ -243,12 +245,12 @@
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="95.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:">
+                              <Text layoutX="95.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:">
                                  <font>
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="Phone_Number_Field" layoutX="140.0" layoutY="147.0" promptText="xxx-xxx-xxxx">
+                              <TextField fx:id="Phone_Number_Field" layoutX="140.0" layoutY="180.0" promptText="xxx-xxx-xxxx">
                                  <font>
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
@@ -263,12 +265,12 @@
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="Class_Number_Field" layoutX="140.0" layoutY="188.0" promptText="xxx">
+                              <TextField fx:id="Class_Number_Field" layoutX="140.0" layoutY="215.0" promptText="xxx">
                                  <font>
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
                               </TextField>
-                              <Text layoutX="46.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class number:">
+                              <Text layoutX="46.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class number:">
                                  <font>
                                     <Font name="SansSerif Bold" size="13.0" />
                                  </font>
@@ -295,6 +297,16 @@
                                     <Font name="SansSerif Bold" size="14.0" />
                                  </font>
                               </Label>
+                              <TextField fx:id="Lastname_Field" layoutX="141.0" layoutY="147.0" promptText="Enter Lastname">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <Text layoutX="75.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname:">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="13.0" />
+                                 </font>
+                              </Text>
                            </children></AnchorPane>
                   </content>
                 </Tab>

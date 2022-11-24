@@ -42,14 +42,15 @@ public class AdminMainModel {
 
             while (resultSet.next()) {
 
-                // Database: id 1|created 2| username 3| password 4| fullname 5| address 6|phonenumber 7|  email 8| subjectsOfStudying 9|  classnumber 10| jobtype 11
-                // Pojo: id 1|created 2| username 3| password 4| fullname 5| address 6|phonenumber 7| email 8|subjectsOfStudying 9|classnumber 10|  jobtype 11) {
+                // Database: id 1|created 2| username 3| password 4| fullname 5| address 6|phonenumber 7|  email 8| subjectsOfStudying 9|  classnumber 10| jobtype 11| lastname 12
+                // Pojo: id 1|created 2| username 3| password 4| firstname 5| lastname 6| address 7|phonenumber 8| email 9|subjectsOfStudying 10|classnumber 11|  jobtype 12) {
 
                 this.employeeData.add(new EmployeeData(resultSet.getString(1), // id
                         resultSet.getString(2), // date
                         resultSet.getString(3), // username
                         resultSet.getString(4), // password
-                        resultSet.getString(5), // full name
+                        resultSet.getString(5), // first name
+                        resultSet.getString(12), // last name
                         resultSet.getString(6), // phone number
                         resultSet.getString(7), // address
                         resultSet.getString(8), // email
@@ -66,10 +67,10 @@ public class AdminMainModel {
         return null;
     }
 
-    public void addEmployee(String username,String password, String fullname,String address
+    public void addEmployee(String username,String password, String firstname,String lastname,String address
     ,String phonenumber,String email, String subjectsofstudying,String classnumber,String jobtype) {
 
-        String query = "INSERT INTO teachers_tbl (username,password,fullname,phone_number,address,email,class_number,subject_of_studying,job_type) VALUES (?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO teachers_tbl (username,password,first_name,last_name,phone_number,address,email,class_number,subject_of_studying,job_type) VALUES (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement statement = null;
 
         try {
@@ -77,13 +78,14 @@ public class AdminMainModel {
 
                 statement.setString(1, username);
                 statement.setString(2, password);
-                statement.setString(3, fullname);
-                statement.setString(4, phonenumber);
-                statement.setString(5, address);
-                statement.setString(6, email);
-                statement.setString(7, classnumber);
-                statement.setString(8, subjectsofstudying);
-                statement.setString(9, jobtype);
+                statement.setString(3, firstname);
+                statement.setString(4, lastname);
+                statement.setString(5, phonenumber);
+                statement.setString(6, address);
+                statement.setString(7, email);
+                statement.setString(8, classnumber);
+                statement.setString(9, subjectsofstudying);
+                statement.setString(10, jobtype);
 
                 statement.execute();
   
@@ -123,23 +125,24 @@ public class AdminMainModel {
         }
     }
 
-    public void editEmployee(String id,String fullname,String address
+    public void editEmployee(String id,String firstname,String lastname,String address
     ,String phonenumber,String email, String subjectsofstudying,String classnumber,String jobtype) { // Method to edit emplyee details
-        String sql = "UPDATE teachers_tbl SET fullname = ?, phone_number = ?,address = ?, email = ?,class_number = ?, subject_of_studying = ?,job_type = ? WHERE id = ?";
+        String sql = "UPDATE teachers_tbl SET first_name = ?,last_name =?, phone_number = ?,address = ?, email = ?,class_number = ?, subject_of_studying = ?,job_type = ? WHERE id = ?";
         PreparedStatement statement = null;
 
         try {
             Connection conn = DataBaseConnection.getConnection();
             statement = conn.prepareStatement(sql);
 
-            statement.setString(1, fullname);
-            statement.setString(2, phonenumber);
-            statement.setString(3, address);
-            statement.setString(4, email);
-            statement.setString(5, classnumber);
-            statement.setString(6, subjectsofstudying);
-            statement.setString(7, jobtype);
-            statement.setInt(8, Integer.parseInt(id));
+            statement.setString(1, firstname);
+            statement.setString(2, lastname);
+            statement.setString(3, phonenumber);
+            statement.setString(4, address);
+            statement.setString(5, email);
+            statement.setString(6, classnumber);
+            statement.setString(7, subjectsofstudying);
+            statement.setString(8, jobtype);
+            statement.setInt(9, Integer.parseInt(id));
 
             statement.execute();
 

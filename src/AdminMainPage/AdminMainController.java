@@ -46,14 +46,6 @@ public class AdminMainController implements Initializable {
     @FXML
     private Label Alert;
 
-    // Search Bar
-    @FXML
-    private TextField SearchField;
-    @FXML
-    private Button searchButton;
-    @FXML 
-    private ListView <String> listView;
-
     // Add Employee buttons
     @FXML
     private Button Submit_Button;
@@ -66,7 +58,9 @@ public class AdminMainController implements Initializable {
     @FXML
     private TextField Password_Field;
     @FXML
-    private TextField Fullname_Field;
+    private TextField Firstname_Field;
+    @FXML
+    private TextField Lastname_Field;
     @FXML
     private TextField Address_Field;
     @FXML
@@ -102,7 +96,9 @@ public class AdminMainController implements Initializable {
     @FXML
     private TableColumn<EmployeeData, String> ID_column1; // employeeTableView1
     @FXML
-    private TableColumn<EmployeeData, String> Fullname_column; // employeeTableView1
+    private TableColumn<EmployeeData, String> Firstname_column; // employeeTableView1
+    @FXML
+    private TableColumn<EmployeeData, String> Lastname_column; // employeeTableView1
     @FXML
     private TableColumn<EmployeeData, String> Job_type_column; // employeeTableView1
     @FXML
@@ -124,7 +120,9 @@ public class AdminMainController implements Initializable {
     @FXML
     private TableColumn<EmployeeData, String> Username_column1; // employeeTableView2
     @FXML
-    private TableColumn<EmployeeData, String> Fullname_column1; // employeeTableView2
+    private TableColumn<EmployeeData, String> Firstname_column1; // employeeTableView2
+    @FXML
+    private TableColumn<EmployeeData, String> Lastname_column1; // employeeTableView1
     @FXML
     private TableColumn<EmployeeData, String> Phone_column1; // employeeTableView2
     @FXML
@@ -222,16 +220,44 @@ public class AdminMainController implements Initializable {
             return false;
         }
 
-        private boolean validFullName(){
-            Pattern p = Pattern.compile("^^[\\p{L} .'-]+$");
-            Matcher m = p.matcher(this.Fullname_Field.getText());
-            if(m.find() && m.group().equals(this.Fullname_Field.getText())){
+        private boolean validFirstName(){
+            Pattern p = Pattern.compile("[a-zA-Z]+");
+            Matcher m = p.matcher(this.Firstname_Field.getText());
+            if(m.find() && m.group().equals(this.Firstname_Field.getText())){
                 return true;
             }
             Alert alert01 = new Alert(AlertType.WARNING);
             alert01.setTitle("Information Message");
-            alert01.setHeaderText("Full name Must Contain only String ");
-            alert01.setContentText("Full name example: John Doe");
+            alert01.setHeaderText("First name Must Contain only String ");
+            alert01.setContentText("Enter Valid first name");
+            alert01.showAndWait();
+            return false;
+        }
+
+        private boolean validLastName(){
+            Pattern p = Pattern.compile("[a-zA-Z]+");
+            Matcher m = p.matcher(this.Lastname_Field.getText());
+            if(m.find() && m.group().equals(this.Lastname_Field.getText())){
+                return true;
+            }
+            Alert alert01 = new Alert(AlertType.WARNING);
+            alert01.setTitle("Information Message");
+            alert01.setHeaderText("Last name Must Contain only String ");
+            alert01.setContentText("Enter Valid last name");
+            alert01.showAndWait();
+            return false;
+        }
+
+        private boolean validUserName(){
+            Pattern p = Pattern.compile("[a-zA-Z0-9]+");
+            Matcher m = p.matcher(this.Username_Field.getText());
+            if(m.find() && m.group().equals(this.Username_Field.getText())){
+                return true;
+            }
+            Alert alert01 = new Alert(AlertType.WARNING);
+            alert01.setTitle("Information Message");
+            alert01.setHeaderText("User name Contain String and Numbers ");
+            alert01.setContentText("User example: test,test123");
             alert01.showAndWait();
             return false;
         }
@@ -249,7 +275,8 @@ public class AdminMainController implements Initializable {
 
         //table 2: employeeTableView1
         this.ID_column1.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-        this.Fullname_column.setCellValueFactory(cellData -> cellData.getValue().fullnameProperty());
+        this.Firstname_column.setCellValueFactory(cellData -> cellData.getValue().firstnamePropery());
+        this.Lastname_column.setCellValueFactory(cellData -> cellData.getValue().lastnameProperty());
         this.Address_column.setCellValueFactory(cellData -> cellData.getValue().addressProperty());
         this.Job_type_column.setCellValueFactory(cellData -> cellData.getValue().jobtypeProperty());
         this.Phone_number_column.setCellValueFactory(cellData -> cellData.getValue().phonenumberProperty());
@@ -264,7 +291,8 @@ public class AdminMainController implements Initializable {
         //table 2: employeeTableView2
         this.ID_column2.setCellValueFactory(cellData -> cellData.getValue().idProperty());
         this.Username_column1.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
-        this.Fullname_column1.setCellValueFactory(cellData -> cellData.getValue().fullnameProperty());
+        this.Firstname_column1.setCellValueFactory(cellData -> cellData.getValue().firstnamePropery());
+        this.Lastname_column1.setCellValueFactory(cellData -> cellData.getValue().lastnameProperty());
         this.Phone_column1.setCellValueFactory(cellData -> cellData.getValue().phonenumberProperty());
         this.Email_column1.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
 
@@ -276,14 +304,13 @@ public class AdminMainController implements Initializable {
     @FXML
     private void addEmployee(ActionEvent event) { // Add employee Method
 
-        if(this.Username_Field.getText() != null &&  this.Password_Field.getText() != null && this.Fullname_Field.getText() != null && validFullName()
-            && this.Address_Field.getText() != null && this.Phone_Number_Field.getText() != null && validPhoneNumber() && this.Email_Field.getText() != null
+        if(this.Username_Field.getText() != null && validUserName() &&  this.Password_Field.getText() != null && this.Firstname_Field.getText() != null && validFirstName()
+           && this.Lastname_Field != null && validLastName() && this.Address_Field.getText() != null && this.Phone_Number_Field.getText() != null && validPhoneNumber() && this.Email_Field.getText() != null
             && validEmail() && this.Class_Number_Field.getText() != null && validClassNumber() && this.Subjects_ComboBox.getValue() != null && this.Job_Type.getValue() != null) {
 
-            adminMainModel.addEmployee(this.Username_Field.getText(), this.Password_Field.getText(),
-            this.Fullname_Field.getText(),this.Address_Field.getText(),this.Phone_Number_Field.getText(),
-            this.Email_Field.getText(),this.Class_Number_Field.getText(),
-            this.Subjects_ComboBox.getValue(),this.Job_Type.getValue());
+            adminMainModel.addEmployee(this.Username_Field.getText(), this.Password_Field.getText(),this.Firstname_Field.getText()
+            ,this.Lastname_Field.getText(),this.Address_Field.getText(),this.Phone_Number_Field.getText(),this.Email_Field.getText()
+            ,this.Subjects_ComboBox.getValue(),this.Class_Number_Field.getText(),this.Job_Type.getValue());
 
             Alert alert1 = new Alert(AlertType.INFORMATION);
             alert1.setTitle("Information Message");
@@ -299,7 +326,8 @@ public class AdminMainController implements Initializable {
 
     public void clearFields(ActionEvent event) { // Method to clear fields
         this.Class_Number_Field.setText("");
-        this.Fullname_Field.setText("");
+        this.Firstname_Field.setText("");
+        this.Lastname_Field.setText("");
         this.Address_Field.setText("");
         this.Phone_Number_Field.setText("");
         this.Email_Field.setText("");
@@ -336,11 +364,13 @@ public class AdminMainController implements Initializable {
 
     TextField editUserNameString = new TextField();
     TextField editPasswordtString = new TextField();
-    TextField editFullNameString = new TextField();
+    TextField editFirstNameString = new TextField();
+    TextField editLastNameString = new TextField();
     TextField editAddressString = new TextField();
     TextField editPhoneNumberString = new TextField();
     TextField editEmailString = new TextField();
     TextField editClassNumberString = new TextField();
+
     ComboBox<String> Job;
     ComboBox<String> Study;
 
@@ -357,10 +387,10 @@ public class AdminMainController implements Initializable {
 
 
                 if(response.getButtonData().equals(ButtonData.OK_DONE)){    
-                    if (editFullNameString.getText() != null && editAddressString.getText() != null && editPhoneNumberString.getText() != null && editEmailString.getText() != null
+                    if (editFirstNameString.getText() != null && editLastNameString.getText() != null && editAddressString.getText() != null && editPhoneNumberString.getText() != null && editEmailString.getText() != null
                         && editClassNumberString.getText() != null && Job.getValue() != null && Study.getValue() != null) {
 
-                            adminMainModel.editEmployee(editId ,editFullNameString.getText(), editAddressString.getText(), editPhoneNumberString.getText(), editEmailString.getText()
+                            adminMainModel.editEmployee(editId ,editFirstNameString.getText(),editLastNameString.getText(), editAddressString.getText(), editPhoneNumberString.getText(), editEmailString.getText()
                             ,editClassNumberString.getText(), Job.getValue(),Study.getValue());
 
                             Alert alert1 = new Alert(AlertType.INFORMATION);
@@ -382,7 +412,8 @@ public class AdminMainController implements Initializable {
         }   );
     }
 
-    private String editFullName;
+    private String editFirstName;
+    private String editLastName;
     private String editAddress;
     private String editPhoneNumber;
     private String editEmail;
@@ -404,26 +435,31 @@ public class AdminMainController implements Initializable {
 
         editUserNameString.setText(editUserName);
         editPasswordtString.setText(editPassword);
-        editFullNameString.setText(editFullName);
+        editFirstNameString.setText(editFirstName);
+        editLastNameString.setText(editLastName);
         editAddressString.setText(editAddress);
         editPhoneNumberString.setText(editPhoneNumber);
         editEmailString.setText(editEmail);
         editClassNumberString.setText(editClassNumber);
+    
+
         gridPane.add(new Label("Modify Employee Form"), 0,0);
-        gridPane.add(new Label("Full name"), 0, 1);
-        gridPane.add(editFullNameString, 1, 1);
-        gridPane.add(new Label("Address"), 0, 2);
-        gridPane.add(editAddressString, 1, 2);
-        gridPane.add(new Label("Phone"), 0, 3);
-        gridPane.add(editPhoneNumberString, 1, 3);
-        gridPane.add(new Label("Email"), 0, 4);
-        gridPane.add(editEmailString, 1, 4);
-        gridPane.add(new Label("Class number"), 0, 5);
-        gridPane.add(editClassNumberString, 1, 5);
-        gridPane.add(new Label("Subject of study"), 0, 6);
-        gridPane.add(Job = new ComboBox<String>(settingSub), 1, 6);
-        gridPane.add(new Label("Job type"), 0, 7);
-        gridPane.add(Study = new ComboBox<String>(settingJob), 1, 7);
+        gridPane.add(new Label("First name"), 0, 1);
+        gridPane.add(editFirstNameString, 1, 1);
+        gridPane.add(new Label("Last name"), 0, 2);
+        gridPane.add(editLastNameString, 1, 2);
+        gridPane.add(new Label("Address"), 0, 3);
+        gridPane.add(editAddressString, 1, 3);
+        gridPane.add(new Label("Phone"), 0, 4);
+        gridPane.add(editPhoneNumberString, 1, 4);
+        gridPane.add(new Label("Email"), 0, 5);
+        gridPane.add(editEmailString, 1, 5);
+        gridPane.add(new Label("Class number"), 0, 6);
+        gridPane.add(editClassNumberString, 1, 6);
+        gridPane.add(new Label("Subject of study"), 0, 7);
+        gridPane.add(Job = new ComboBox<String>(settingSub), 1, 7);
+        gridPane.add(new Label("Job type"), 0, 8);
+        gridPane.add(Study = new ComboBox<String>(settingJob), 1, 8);
 
         dialog.getDialogPane().setContent(gridPane);
 
