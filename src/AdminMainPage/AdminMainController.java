@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,7 +20,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -45,6 +43,9 @@ public class AdminMainController implements Initializable {
     private Button Remove_Button;
     @FXML
     private Label Alert;
+
+    @FXML
+    private TextField SearchField;
 
     // Add Employee buttons
     @FXML
@@ -136,7 +137,6 @@ public class AdminMainController implements Initializable {
     Dialog<ButtonType> dialog = null;
     Dialog<ButtonType> dialog1 = null;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -178,6 +178,19 @@ public class AdminMainController implements Initializable {
             }
         }
 
+        private boolean validPassword(){
+            Pattern p = Pattern.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})");
+            Matcher m = p.matcher(this.Password_Field.getText());
+            if(m.find() && m.group().equals(this.Password_Field.getText())){
+                return true;
+            }
+            Alert alert01 = new Alert(AlertType.WARNING);
+            alert01.setTitle("Information Message");
+            alert01.setHeaderText("Password Must Contain Digits and Characters");
+            alert01.setContentText("Password leanght Must be between 6 - 12. Characters: LowerCase,UperCase and digits)");
+            alert01.showAndWait();
+            return false;
+        }
         private boolean validClassNumber(){
             Pattern p = Pattern.compile("[0-9]{3}+");
             Matcher m = p.matcher(this.Class_Number_Field.getText());
@@ -233,6 +246,7 @@ public class AdminMainController implements Initializable {
             alert01.showAndWait();
             return false;
         }
+
 
         private boolean validLastName(){
             Pattern p = Pattern.compile("[a-zA-Z]+");
@@ -304,7 +318,7 @@ public class AdminMainController implements Initializable {
     @FXML
     private void addEmployee(ActionEvent event) { // Add employee Method
 
-        if(this.Username_Field.getText() != null && validUserName() &&  this.Password_Field.getText() != null && this.Firstname_Field.getText() != null && validFirstName()
+        if(this.Username_Field.getText() != null && validUserName() &&  this.Password_Field.getText() != null && validPassword() && this.Firstname_Field.getText() != null && validFirstName()
            && this.Lastname_Field != null && validLastName() && this.Address_Field.getText() != null && this.Phone_Number_Field.getText() != null && validPhoneNumber() && this.Email_Field.getText() != null
             && validEmail() && this.Class_Number_Field.getText() != null && validClassNumber() && this.Subjects_ComboBox.getValue() != null && this.Job_Type.getValue() != null) {
 
@@ -387,8 +401,10 @@ public class AdminMainController implements Initializable {
 
 
                 if(response.getButtonData().equals(ButtonData.OK_DONE)){    
-                    if (editFirstNameString.getText() != null && editLastNameString.getText() != null && editAddressString.getText() != null && editPhoneNumberString.getText() != null && editEmailString.getText() != null
-                        && editClassNumberString.getText() != null && Job.getValue() != null && Study.getValue() != null) {
+                    if (editFirstNameString.getText() != null && validFirstName1() && editLastNameString.getText() != null && validLastName1() && editAddressString.getText() != null && editPhoneNumberString.getText() != null &&  validPhoneNumber1() && editEmailString.getText() != null
+                       && validEmail1() && editClassNumberString.getText() != null && validClassNumber1() && Job.getValue() != null && Study.getValue() != null) {
+
+
 
                             adminMainModel.editEmployee(editId ,editFirstNameString.getText(),editLastNameString.getText(), editAddressString.getText(), editPhoneNumberString.getText(), editEmailString.getText()
                             ,editClassNumberString.getText(), Job.getValue(),Study.getValue());
@@ -479,7 +495,7 @@ public class AdminMainController implements Initializable {
 
                 if(response.getButtonData().equals(ButtonData.OK_DONE)) {    
 
-                    if (editUserNameString.getText() != null && editPasswordtString.getText() != null) {
+                    if (editUserNameString.getText() != null && validUserName1() && editPasswordtString.getText() != null && validPassword1() ) {
 
                             adminMainModel.editEmployee1(editId , editUserNameString.getText(), editPasswordtString.getText());
                             Alert alert1 = new Alert(AlertType.INFORMATION);
@@ -530,5 +546,103 @@ public class AdminMainController implements Initializable {
 
         dialog.getDialogPane().getButtonTypes().add(editModalBtn);
         dialog.getDialogPane().getButtonTypes().add(cancelModalBtn);
+    }
+        
+    private boolean validPassword1(){
+        Pattern p = Pattern.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})");
+        Matcher m = p.matcher(editPasswordtString.getText());
+        if(m.find() && m.group().equals(editPasswordtString.getText())){
+            return true;
+        }
+        Alert alert01 = new Alert(AlertType.WARNING);
+        alert01.setTitle("Information Message");
+        alert01.setHeaderText("Password Must Contain Digits and Characters");
+        alert01.setContentText("Password leanght Must be between 6 - 12. Characters: LowerCase,UperCase and digits)");
+        alert01.showAndWait();
+        return false;
+    }
+    private boolean validClassNumber1(){
+        Pattern p = Pattern.compile("[0-9]{3}+");
+        Matcher m = p.matcher(editClassNumberString.getText());
+        if(m.find() && m.group().equals(editClassNumberString.getText())){
+            return true;
+        }
+        Alert alert01 = new Alert(AlertType.WARNING);
+        alert01.setTitle("Information Message");
+        alert01.setHeaderText("Class Number Must Contain only Digits");
+        alert01.setContentText("class number need to contain 3 digits: xxx");
+        alert01.showAndWait();
+        return false;
+    }
+
+    private boolean validPhoneNumber1(){
+        Pattern p = Pattern.compile("([0-9]{3}[-][0-9]{3}[-][0-9]{4})+");
+        Matcher m = p.matcher(editPhoneNumberString.getText());
+        if(m.find() && m.group().equals(editPhoneNumberString.getText())){
+            return true;
+        }
+        Alert alert01 = new Alert(AlertType.WARNING);
+        alert01.setTitle("Information Message");
+        alert01.setHeaderText("Phone Number Must Contain only Digits");
+        alert01.setContentText("Phone number need to contain 10 digits: xxx-xxx-xxxx");
+        alert01.showAndWait();
+        return false;
+    }
+
+    private boolean validEmail1(){
+        Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+        Matcher m = p.matcher(editEmailString.getText());
+        if(m.find() && m.group().equals(editEmailString.getText())){
+            return true;
+        }
+        Alert alert01 = new Alert(AlertType.WARNING);
+        alert01.setTitle("Information Message");
+        alert01.setHeaderText("Email Must Contain @ and can contain '_','.','0-9' ");
+        alert01.setContentText("Email example: test@example.com");
+        alert01.showAndWait();
+        return false;
+    }
+
+    private boolean validFirstName1(){
+        Pattern p = Pattern.compile("[a-zA-Z]+");
+        Matcher m = p.matcher(editFirstNameString.getText());
+        if(m.find() && m.group().equals(editFirstNameString.getText())){
+            return true;
+        }
+        Alert alert01 = new Alert(AlertType.WARNING);
+        alert01.setTitle("Information Message");
+        alert01.setHeaderText("First name Must Contain only String ");
+        alert01.setContentText("Enter Valid first name");
+        alert01.showAndWait();
+        return false;
+    }
+
+
+    private boolean validLastName1(){
+        Pattern p = Pattern.compile("[a-zA-Z]+");
+        Matcher m = p.matcher(editLastNameString.getText());
+        if(m.find() && m.group().equals(editLastNameString.getText())){
+            return true;
+        }
+        Alert alert01 = new Alert(AlertType.WARNING);
+        alert01.setTitle("Information Message");
+        alert01.setHeaderText("Last name Must Contain only String ");
+        alert01.setContentText("Enter Valid last name");
+        alert01.showAndWait();
+        return false;
+    }
+
+    private boolean validUserName1(){
+        Pattern p = Pattern.compile("[a-zA-Z0-9]+");
+        Matcher m = p.matcher(editUserNameString.getText());
+        if(m.find() && m.group().equals(editUserNameString.getText())){
+            return true;
+        }
+        Alert alert01 = new Alert(AlertType.WARNING);
+        alert01.setTitle("Information Message");
+        alert01.setHeaderText("User name Contain String and Numbers ");
+        alert01.setContentText("User example: test,test123");
+        alert01.showAndWait();
+        return false;
     }
 }

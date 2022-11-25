@@ -83,8 +83,8 @@ public class AdminMainModel {
                 statement.setString(5, phonenumber);
                 statement.setString(6, address);
                 statement.setString(7, email);
-                statement.setString(8, classnumber);
-                statement.setString(9, subjectsofstudying);
+                statement.setString(9, classnumber);
+                statement.setString(8, subjectsofstudying);
                 statement.setString(10, jobtype);
 
                 statement.execute();
@@ -181,6 +181,5 @@ public class AdminMainModel {
             }
         }
     }
-
 
 }
